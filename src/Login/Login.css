@@ -1,0 +1,21 @@
+.login{
+
+    width: 100%;
+    height: 100%;
+    background-image: url('../assets/login_banner.png');
+    /* background-color: palegreen; */
+    padding: 100px 30px 100px;
+    
+}
+.banner{
+    position: absolute;
+    
+}
+
+.content{
+    
+    border-radius: 10px 10px 0 0;
+    background-color: pink;
+    padding: 10px;
+    flex-grow: 1
+}
