@@ -72,8 +72,9 @@ function StepsWidget({ height, items, percent }) {
                     height: "7px",
                     width: "7px",
                     border: "1px solid #fff",
-                    backgroundColor: "rgba(9, 71, 149, 1)",
+                    backgroundColor: "rgba(9, 71, 149, 0.5)",
                     borderRadius: "50%",
+                    backdropFilter: "blur(10px)",
                   }}
                 ></div>
               </div>
