@@ -1,24 +1,24 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Switch } from "antd";
+// import { Switch } from "antd";
 import { CaretRightOutlined, StepForwardOutlined } from "@ant-design/icons";
 import "./Timeline.css";
 
 // 年、月 模式切换
-function SwitchYearAndMonth({ playMode, setPlayMode }) {
-  return (
-    <Switch
-      size="small"
-      checkedChildren="年"
-      unCheckedChildren="月"
-      style={{
-        backgroundColor: "rgba(9, 71, 149, 1)",
-      }}
-      checked={playMode}
-      onChange={setPlayMode}
-    />
-  );
-}
+// function SwitchYearAndMonth({ playMode, setPlayMode }) {
+//   return (
+//     <Switch
+//       size="small"
+//       checkedChildren="年"
+//       unCheckedChildren="月"
+//       style={{
+//         backgroundColor: "rgba(9, 71, 149, 1)",
+//       }}
+//       checked={playMode}
+//       onChange={setPlayMode}
+//     />
+//   );
+// }
 
 // 播放、暂停按钮
 function ControllerWidget({ playingStatus, setPlayingStatus }) {
@@ -46,8 +46,39 @@ function StepsWidget({ height, items, percent }) {
     <div className="bar" style={{ height: `${height + itemHeight}px` }}>
       <div className="bar-body" style={{ height: `${height}px` }}>
         {/* 进度条 */}
-        <div className="bar-outline">
-          <div className="bar-color" style={{ height: `${percent}%` }} />
+
+        <div style={{ height: "100%", position: "relative" }}>
+          <div className="bar-outline">
+            <div className="bar-color" style={{ height: `${percent}%` }} />
+          </div>
+          <div
+            style={{
+              height: `${height + itemHeight}px`,
+              position: "absolute",
+              top: "-3px",
+              left: "-1px",
+            }}
+          >
+            {items.map((item, index) => (
+              <div
+                key={index}
+                style={{
+                  height: `${itemHeight2}px`,
+                  width: "5px",
+                }}
+              >
+                <div
+                  style={{
+                    height: "7px",
+                    width: "7px",
+                    border: "1px solid #fff",
+                    backgroundColor: "rgba(9, 71, 149, 1)",
+                    borderRadius: "50%",
+                  }}
+                ></div>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* item */}
