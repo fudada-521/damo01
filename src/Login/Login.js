@@ -1,6 +1,6 @@
 import React from "react";
 import "./Login.css";
-import TimelineComponent from "../Stepsbar/Timeline";
+import TimelineComponent from "../Timeline/Timeline";
 
 // 页面主体
 export default function Login() {
