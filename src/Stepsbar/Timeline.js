@@ -3,6 +3,43 @@ import { useState, useEffect } from "react";
 // import { Switch } from "antd";
 import { CaretRightOutlined, StepForwardOutlined } from "@ant-design/icons";
 import "./Timeline.css";
+// 用法示例：
+// const itmesForYear = ["2017", "2018", "2019", "2020", "2021", "2022", "2023"];
+//   const itmesForMonth = [
+//     "2017-01",
+//     "2017-02",
+//     "2017-03",
+//     "2017-04",
+//     "2017-05",
+//     "2017-06",
+//     "2017-07",
+//     "2017-08",
+//     "2017-09",
+//     "2017-10",
+//     "2017-11",
+//     "2017-12",
+//   ];
+
+//   return (
+//     <>
+//       <div className="login">
+//         <TimelineComponent
+//           model={"year"}
+//           itmes={itmesForYear}
+//           onChange={() => {
+//             console.log("触发回调");
+//           }}
+//         />
+//         <TimelineComponent
+//           model={"month"}
+//           itmes={itmesForMonth}
+//           onChange={() => {
+//             console.log("触发回调");
+//           }}
+//         />
+//       </div>
+//     </>
+//   );
 
 // 年、月 模式切换
 // function SwitchYearAndMonth({ playMode, setPlayMode }) {
@@ -22,18 +59,53 @@ import "./Timeline.css";
 
 // 播放、暂停按钮
 function ControllerWidget({ playingStatus, setPlayingStatus }) {
-  // 文字样式
-  var style = {
-    color: "#666666",
-    fontSize: "13px",
-    padding: "5px 0px",
-    width: "60px",
-  };
-
   return (
-    <div style={style} onClick={setPlayingStatus}>
+    <div className="play" onClick={setPlayingStatus}>
       {!playingStatus ? <CaretRightOutlined /> : <StepForwardOutlined />}
-      <span style={style}>{!playingStatus ? "播放" : "暂停"}</span>
+      <span className="play">{!playingStatus ? "播放" : "暂停"}</span>
+    </div>
+  );
+}
+
+/// 步骤条 - 底部色条
+/// percent: 当前百分比
+function BarBaseLine({ percent }) {
+  return (
+    <div className="bar-line">
+      <div className="bar-color" style={{ height: `${percent}%` }} />
+    </div>
+  );
+}
+
+/// 步骤条 - 步骤条上的圆点
+function BarPoint() {
+  return <div className="bar-point" />;
+}
+/// 步骤条 - 步骤条上的圆点+占位
+function BarPointItem({ height }) {
+  return (
+    <div
+      className="bar-point-item"
+      style={{
+        height: `${height}px`,
+      }}
+    >
+      <BarPoint />
+      {/* <div className="bar-point" /> */}
+    </div>
+  );
+}
+function BarPointLine({ items, height, itemHeight, itemHeight2 }) {
+  return (
+    <div
+      className="bar-point-line"
+      //   style={{
+      //     height: `${height}px`,
+      //   }}
+    >
+      {items.map((item, index) => (
+        <BarPointItem key={index} height={itemHeight2} />
+      ))}
     </div>
   );
 }
@@ -47,39 +119,14 @@ function StepsWidget({ height, items, percent }) {
       <div className="bar-body" style={{ height: `${height}px` }}>
         {/* 进度条 */}
 
-        <div style={{ height: "100%", position: "relative" }}>
-          <div className="bar-outline">
-            <div className="bar-color" style={{ height: `${percent}%` }} />
-          </div>
-          <div
-            style={{
-              height: `${height + itemHeight}px`,
-              position: "absolute",
-              top: "-3px",
-              left: "-1px",
-            }}
-          >
-            {items.map((item, index) => (
-              <div
-                key={index}
-                style={{
-                  height: `${itemHeight2}px`,
-                  width: "5px",
-                }}
-              >
-                <div
-                  style={{
-                    height: "7px",
-                    width: "7px",
-                    border: "1px solid #fff",
-                    backgroundColor: "rgba(9, 71, 149, 0.5)",
-                    borderRadius: "50%",
-                    backdropFilter: "blur(10px)",
-                  }}
-                ></div>
-              </div>
-            ))}
-          </div>
+        <div className="container-line">
+          <BarBaseLine percent={percent} />
+          <BarPointLine
+            items={items}
+            height={height}
+            itemHeight={itemHeight}
+            itemHeight2={itemHeight2}
+          />
         </div>
 
         {/* item */}

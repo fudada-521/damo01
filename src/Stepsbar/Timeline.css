@@ -1,3 +1,10 @@
+.play {
+  color: #666666;
+  font-size: 13px;
+  padding: 5px 0px;
+  width: 60px;
+}
+
 .bar {
   display: flex;
   align-items: center;
@@ -11,8 +18,11 @@
   align-items: center;
   justify-content: center;
 }
-
-.bar-outline {
+.container-line {
+  height: 100%;
+  position: relative;
+}
+.bar-line {
   position: absolute;
   /* border: 1px solid #fff; */
   background-color: white;
@@ -20,16 +30,32 @@
   height: 100%;
   width: 5px;
 }
+.bar-point-line {
+  position: absolute;
+  top: -6px;
+  left: -1px;
+  /* border: 1px solid pink; */
+}
 
 .bar-color {
-  background-color: rgba(9, 71, 149, 1);
+  background-color: rgba(62, 122, 209, 1);
   width: 100%;
   height: 0%;
   transition: height 0.5s ease-out;
 }
-/* .bar-item-board{
-    
-} */
+.bar-point {
+  height: 7px;
+  width: 7px;
+  border: 1px solid #fff;
+  /* background-color: rgba(62, 122, 209, 0.5); */
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  /* backdrop-filter: blur(10px); */
+}
+.bar-point-item {
+  width: 5px;
+}
+
 .bar-item {
   display: flex;
   align-items: center;
@@ -37,5 +63,5 @@
   font-size: 12px;
   margin-left: 10px;
 
-  /* background-color: pink; */
+  background-color: pink;
 }
