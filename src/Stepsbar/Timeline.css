@@ -1,67 +1,83 @@
 .play {
+  display: flex;
+  align-items: center;
   color: #666666;
   font-size: 13px;
-  padding: 5px 0px;
-  width: 60px;
+  padding: 2px 0px;
 }
 
-.bar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(255, 255, 255, 0.3);
-  border-radius: 3px;
-  padding: 5px;
-}
-.bar-body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.container-line {
-  height: 100%;
-  position: relative;
-}
-.bar-line {
-  position: absolute;
-  /* border: 1px solid #fff; */
+/* 进度条-底部色条 */
+.bar-base-line {
   background-color: white;
   min-height: 100px;
   height: 100%;
   width: 5px;
+  border-radius: 2.5px;
 }
-.bar-point-line {
+/* 进度条-进度的值条 */
+.bar-color-line {
   position: absolute;
-  top: -6px;
-  left: -1px;
-  /* border: 1px solid pink; */
-}
-
-.bar-color {
+  top: 0;
+  height: 40px;
+  width: 5px;
   background-color: rgba(62, 122, 209, 1);
-  width: 100%;
-  height: 0%;
+  border-top-left-radius: 1.5px;
+  border-top-right-radius: 1.5px;
   transition: height 0.5s ease-out;
 }
+/* 进度条-圆点 */
 .bar-point {
   height: 7px;
   width: 7px;
-  border: 1px solid #fff;
-  /* background-color: rgba(62, 122, 209, 0.5); */
-  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid white;
+  background-color: rgba(62, 122, 209, 0.5);
   border-radius: 50%;
-  /* backdrop-filter: blur(10px); */
+  backdrop-filter: blur(10px);
 }
-.bar-point-item {
-  width: 5px;
+/* 进度条-圆点条 */
+.bar-point-line {
+  top: 0;
+  position: absolute;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
-
-.bar-item {
+/* 文字 */
+.bar-text {
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 12px;
-  margin-left: 10px;
-
-  background-color: pink;
+}
+/* 进度条-文字 */
+.bar-text-line {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: 5px;
+}
+.bar-container-major {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 9px;
+}
+/* 底图、进度的容器 */
+.bar-container {
+  display: flex;
+}
+/* （底图、进度）+ 文字的容器 */
+.bar-body {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+/* 整体容器 半透明背景色容器*/
+.bar {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+  padding: 5px;
 }

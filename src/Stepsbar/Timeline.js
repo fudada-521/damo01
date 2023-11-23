@@ -1,6 +1,5 @@
 import React from "react";
 import { useState, useEffect } from "react";
-// import { Switch } from "antd";
 import { CaretRightOutlined, StepForwardOutlined } from "@ant-design/icons";
 import "./Timeline.css";
 // 用法示例：
@@ -67,44 +66,40 @@ function ControllerWidget({ playingStatus, setPlayingStatus }) {
   );
 }
 
-/// 步骤条 - 底部色条
-/// percent: 当前百分比
-function BarBaseLine({ percent }) {
+/// 进度条-底部色条
+
+function BarBaseLine() {
+  return <div className="bar-base-line" />;
+}
+// 进度条-进度值色条
+function BarColorLine({ percent }) {
+  return <div className="bar-color-line" style={{ height: `${percent}%` }} />;
+}
+/// 圆点
+function BarPoint() {
+  return <div className="bar-point" />;
+}
+// 进度条-圆点条
+function BarPointLine({ items }) {
   return (
-    <div className="bar-line">
-      <div className="bar-color" style={{ height: `${percent}%` }} />
+    <div className="bar-point-line">
+      {items.map((item, index) => (
+        <BarPoint key={index} />
+      ))}
     </div>
   );
 }
 
-/// 步骤条 - 步骤条上的圆点
-function BarPoint() {
-  return <div className="bar-point" />;
+// 文字item
+function BarText({ title }) {
+  return <div className="bar-text">{title}</div>;
 }
-/// 步骤条 - 步骤条上的圆点+占位
-function BarPointItem({ height }) {
+
+function BarTextLine({ items }) {
   return (
-    <div
-      className="bar-point-item"
-      style={{
-        height: `${height}px`,
-      }}
-    >
-      <BarPoint />
-      {/* <div className="bar-point" /> */}
-    </div>
-  );
-}
-function BarPointLine({ items, height, itemHeight, itemHeight2 }) {
-  return (
-    <div
-      className="bar-point-line"
-      //   style={{
-      //     height: `${height}px`,
-      //   }}
-    >
+    <div className="bar-text-line">
       {items.map((item, index) => (
-        <BarPointItem key={index} height={itemHeight2} />
+        <BarText key={index} title={item} />
       ))}
     </div>
   );
@@ -112,40 +107,25 @@ function BarPointLine({ items, height, itemHeight, itemHeight2 }) {
 
 /// 步骤条Widget
 function StepsWidget({ height, items, percent }) {
-  const itemHeight = height / items.length;
-  const itemHeight2 = height / (items.length - 1);
+  const subHeight = height / items.length;
   return (
-    <div className="bar" style={{ height: `${height + itemHeight}px` }}>
-      <div className="bar-body" style={{ height: `${height}px` }}>
-        {/* 进度条 */}
-
-        <div className="container-line">
-          <BarBaseLine percent={percent} />
-          <BarPointLine
-            items={items}
-            height={height}
-            itemHeight={itemHeight}
-            itemHeight2={itemHeight2}
-          />
-        </div>
-
-        {/* item */}
+    // 半透明圆角背景色
+    <div className="bar">
+      <div className="bar-container" style={{ height: `${height}px` }}>
         <div
-          className="bar-item-board"
-          style={{ height: `${height + itemHeight}px` }}
+          className="bar-container-major"
+          style={{
+            height: `${height - subHeight / 2}px`,
+            marginTop: `${subHeight / 4}px`,
+          }}
         >
-          {items.map((item, index) => (
-            <div
-              className="bar-item"
-              key={index}
-              style={{
-                height: `${itemHeight2}px`,
-              }}
-            >
-              {item}
-            </div>
-          ))}
+          <BarBaseLine />
+          <BarColorLine percent={percent} />
+          <BarPointLine items={items} />
         </div>
+
+        {/* 文字部分 */}
+        <BarTextLine items={items} />
       </div>
     </div>
   );
