@@ -147,7 +147,7 @@ const TimelineComponent = ({ model, itmes, onChange }) => {
   const [playingStatus, setPlayingStatus] = useState(false);
 
   // 当前的进度百分比
-  const [percent, setPercent] = useState(0.0);
+  //   const [percent, setPercent] = useState(0.0);
 
   // 切换播放模式
   // function handlePlayModeChange() {
@@ -165,6 +165,7 @@ const TimelineComponent = ({ model, itmes, onChange }) => {
   //     }
   // }
 
+  const [index, setIndex] = useState(0);
   // 播放状态
   function handlePlayingStatus() {
     setPlayingStatus(!playingStatus);
@@ -175,7 +176,9 @@ const TimelineComponent = ({ model, itmes, onChange }) => {
     if (playingStatus) {
       // 开始计时任务
       intervalId = setInterval(() => {
-        setPercent((prevCount) => (prevCount >= 99 ? 0 : prevCount + size));
+        let createIndex = index >= itmes.length - 1 ? 0 : index + 1;
+        setIndex(createIndex);
+        onChange(createIndex);
       }, 1000);
     } else {
       // 清除定时器
@@ -184,7 +187,7 @@ const TimelineComponent = ({ model, itmes, onChange }) => {
 
     // 在组件卸载时清除定时器
     return () => clearInterval(intervalId);
-  }, [playingStatus, size]);
+  }, [itmes, playingStatus, index, onChange]);
   return (
     <div style={{ display: "inline-block" }}>
       {/* <SwitchYearAndMonth playMode={playMode} setPlayMode={() => handlePlayModeChange()} /> */}
@@ -192,7 +195,7 @@ const TimelineComponent = ({ model, itmes, onChange }) => {
         playingStatus={playingStatus}
         setPlayingStatus={() => handlePlayingStatus()}
       />
-      <StepsWidget height={height} items={itmes} percent={percent} />
+      <StepsWidget height={height} items={itmes} percent={index * size} />
     </div>
   );
 };

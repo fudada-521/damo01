@@ -21,8 +21,7 @@
   height: 40px;
   width: 5px;
   background-color: rgba(62, 122, 209, 1);
-  border-top-left-radius: 1.5px;
-  border-top-right-radius: 1.5px;
+  border-radius: 2.5px;
   transition: height 0.5s ease-out;
 }
 /* 进度条-圆点 */

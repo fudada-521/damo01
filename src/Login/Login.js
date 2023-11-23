@@ -26,15 +26,15 @@ export default function Login() {
         <TimelineComponent
           model={"year"}
           itmes={itmesForYear}
-          onChange={() => {
-            console.log("触发回调");
+          onChange={(index) => {
+            console.log(`触发回调${index}`);
           }}
         />
         <TimelineComponent
           model={"month"}
           itmes={itmesForMonth}
-          onChange={() => {
-            console.log("触发回调");
+          onChange={(index) => {
+            console.log(`触发回调${index}`);
           }}
         />
       </div>
